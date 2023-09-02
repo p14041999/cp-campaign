@@ -24,7 +24,7 @@ export default function Home() {
               alt="logo"
               className="w-56 mb-8 sm:mb-14 lg:mb-10"
             />
-            <h1 className=" text-2xl xl:text-4xl font-bold text-justify leading-10">
+            <h1 className=" text-2xl sm:text-3xl xl:text-4xl font-bold text-justify leading-10">
               Next Big Web3.0 Project from you?
             </h1>
             <div className=" py-8 xl:py-10">
@@ -58,8 +58,8 @@ export default function Home() {
                   🏆
                 </button>
               </div>
-              <div className="mt-4 flex justify-center">
-                <button className="border w-full xl:w-56 h-12 rounded-full flex justify-center items-center btn-gradient-1">
+              <div className="mt-4 2xl:mt-6 flex justify-center">
+                <button className="border w-full xl:w-60 h-12 rounded-full flex justify-center items-center btn-gradient-1">
                   <h1 className="gradLink font-semibold text-sm mr-2">
                     Customer Support{" "}
                   </h1>
