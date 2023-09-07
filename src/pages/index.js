@@ -6,6 +6,7 @@ import YourName from "@/components/YourName";
 import axios from "axios";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import Script from "next/script";
 import { useState } from "react";
 
 export default function Home() {
@@ -110,6 +111,14 @@ export default function Home() {
           )}
         </div>
       </div>
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-619848814"></Script>
+      <Script id="google-analytics">
+        {`window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'AW-619848814');`}
+      </Script>
     </>
   );
 }
