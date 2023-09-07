@@ -1,10 +1,13 @@
+import { useRouter } from "next/router";
 import React from "react";
 
 const YourBudget = ({ budget, setBudget, setNext,handleSubmit }) => {
+  const router = useRouter();
   const handleNext = (e) => {
     e.preventDefault();
     handleSubmit().then(()=>{
-      setNext("submited");
+      router.push('/done');
+      // setNext("submited");
     }).catch((err)=>{
       // toast
     })
