@@ -1,7 +1,8 @@
 import React from "react";
 
 const YourBudget = ({ budget, setBudget, setNext,handleSubmit }) => {
-  const handleNext = () => {
+  const handleNext = (e) => {
+    e.preventDefault();
     handleSubmit().then(()=>{
       setNext("submited");
     }).catch((err)=>{
@@ -14,6 +15,7 @@ const YourBudget = ({ budget, setBudget, setNext,handleSubmit }) => {
       <div className=" w-full h-96 lg:h-full sm:w-9/12 md:w-10/12 bg-white/70 rounded-xl backdrop-blur-xl p-4 sm:p-8 flex flex-col justify-between">
         <h1 className=" text-3xl font-bold text-center">Let's Goo!</h1>
         <div>
+          
           <h1 className="font-semibold mb-4">Your budget please</h1>
           <textarea
             value={budget}
@@ -22,18 +24,22 @@ const YourBudget = ({ budget, setBudget, setNext,handleSubmit }) => {
           />
         </div>
         <div className="w-full flex gap-4 justify-between">
+
           <button
             onClick={() => setNext("about")}
             className="w-44 h-12 btn-gradient-2"
           >
             Back
           </button>
+          <form action="https://api.codepartner.in" method="get" onSubmit={handleNext}>
           <button
-            onClick={handleNext}
+            // onClick={handleNext}
+            type="submit"
             className=" bg-gradient-to-l from-primary-color to-secondary-color  w-44 h-12 text-white rounded-xl"
           >
             Next
           </button>
+          </form>
         </div>
       </div>
     </>
