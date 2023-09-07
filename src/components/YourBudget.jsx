@@ -1,8 +1,12 @@
 import React from "react";
 
-const YourBudget = ({ budget, setBudget, setNext }) => {
+const YourBudget = ({ budget, setBudget, setNext,handleSubmit }) => {
   const handleNext = () => {
-    setNext("submited");
+    handleSubmit().then(()=>{
+      setNext("submited");
+    }).catch((err)=>{
+      // toast
+    })
   };
 
   return (

@@ -3,6 +3,8 @@ import Submited from "@/components/Submited";
 import YourBudget from "@/components/YourBudget";
 import YourEmail from "@/components/YourEmail";
 import YourName from "@/components/YourName";
+import axios from "axios";
+import Head from "next/head";
 import { useState } from "react";
 
 export default function Home() {
@@ -12,9 +14,20 @@ export default function Home() {
   const [budget, setBudget] = useState(0);
 
   const [next, setNext] = useState("name");
-
+  const handleSubmit = async ()=>{
+    axios.post('http://localhost:3010/raise-query', JSON.stringify({name,email,reason:about,budget}), {
+      headers:{
+        "Content-Type":"application/json"
+      }
+    })
+  }
   return (
     <>
+    <Head>
+      <title>Best Blockchain Developer</title>
+      <meta name="keyword" content="Web3, web3.0, blockchain, blockchain developer"></meta>
+      <meta name="description" content="Best blockchain development agency worldewide. Start creating a token for your company."></meta>
+    </Head>
       <div className=" w-full min-h-screen h-full flex flex-col lg:flex-row ">
         {/* Left DIV */}
         <div className="w-full lg:w-5/12 h-full px-6 sm:flex justify-center py-10 sm:py-14">
@@ -81,7 +94,7 @@ export default function Home() {
             <AboutYourProject about={about} setAbout={setAbout} setNext={setNext} />
           )}
           {next === "budget" && (
-            <YourBudget budget={budget} setBudget={setBudget} setNext={setNext} />
+            <YourBudget budget={budget} setBudget={setBudget} setNext={setNext} handleSubmit={handleSubmit}/>
           )}
           {next === "submited" && (
             <Submited />

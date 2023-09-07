@@ -15,9 +15,9 @@ const Submited = ({ email }) => {
             </p>
           </div>
         <div className="w-full flex justify-center">
-          <button className=" bg-gradient-to-l from-primary-color to-secondary-color  w-64 h-12 text-white rounded-xl">
+          <a href="https://www.codepartner.in" className=" bg-gradient-to-l from-primary-color to-secondary-color  w-64 h-12 text-white rounded-xl">
             Check our website
-          </button>
+          </a>
         </div>
         </div>
       </div>
