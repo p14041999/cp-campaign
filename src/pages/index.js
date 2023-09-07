@@ -17,7 +17,7 @@ export default function Home() {
   const [next, setNext] = useState("name");
   const router = useRouter();
   const handleSubmit = async ()=>{
-    axios.post('https://api.codepartner.link/raise-query', JSON.stringify({name,email,reason:about,budget}), {
+    axios.post('https://api.codepartner.link/raise-query', JSON.stringify({name,email,reason:about,budget,queryparam:router.query}), {
       headers:{
         "Content-Type":"application/json"
       }
