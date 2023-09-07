@@ -5,6 +5,7 @@ import YourEmail from "@/components/YourEmail";
 import YourName from "@/components/YourName";
 import axios from "axios";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 export default function Home() {
@@ -14,12 +15,20 @@ export default function Home() {
   const [budget, setBudget] = useState(0);
 
   const [next, setNext] = useState("name");
+  const router = useRouter();
   const handleSubmit = async ()=>{
     axios.post('https://api.codepartner.link/raise-query', JSON.stringify({name,email,reason:about,budget}), {
       headers:{
         "Content-Type":"application/json"
       }
+    }).catch(e=>{
+      // console.log(e);
     })
+    // axios.post('http://localhost:3010/raise-query', JSON.stringify({name,email,reason:about,budget,queryparam:router.query}), {
+    //   headers:{
+    //     "Content-Type":"application/json"
+    //   }
+    // })
   }
   return (
     <>
