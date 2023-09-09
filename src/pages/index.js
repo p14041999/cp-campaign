@@ -13,7 +13,7 @@ export default function Home() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [about, setAbout] = useState("");
-  const [budget, setBudget] = useState(0);
+  const [budget, setBudget] = useState();
 
   const [next, setNext] = useState("name");
   const router = useRouter();

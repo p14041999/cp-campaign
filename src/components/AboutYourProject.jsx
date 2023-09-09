@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 
 const AboutYourProject = ({ about, setAbout, setNext }) => {
+  const [isError,setIsError] = useState(false);
+
   const handleNext = () => {
-    setNext("budget");
+    if(about){
+      setNext("budget");
+    }else{
+      setIsError(true)
+    }
   };
 
   return (
@@ -11,7 +17,8 @@ const AboutYourProject = ({ about, setAbout, setNext }) => {
         <h1 className=" text-3xl font-bold text-center">Let's Goo!</h1>
         <div>
           <h1 className="font-semibold mb-4">Tell us a bit about project</h1>
-          <textarea value={about} onChange={(e) => setAbout(e.target.value)} className="w-full outline-none p-3 h-12 rounded-xl"/>
+          <textarea value={about} onChange={(e) => setAbout(e.target.value)} className={isError?"w-full outline-none p-3 h-12 rounded-xl border border-red-600":"w-full outline-none p-3 h-12 rounded-xl"}/>
+          {isError && <p className="text-red-600"><small>Can't be empty</small></p>}
         </div>
         <div className="w-full flex gap-4 justify-between">
           <button

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 const YourName = ({ name, setName, setNext }) => {
 
+  const [isError,setIsError] = useState(false);
 
 
   return (
@@ -12,13 +13,20 @@ const YourName = ({ name, setName, setNext }) => {
           <h1 className="font-semibold mb-4">Your Name</h1>
           <input
             value={name}
-            className="w-full outline-none p-3 h-12 rounded-xl"
+            className={isError?"w-full outline-none p-3 h-12 rounded-xl border border-orange-600":"w-full outline-none p-3 h-12 rounded-xl"}
             onChange={(e) => setName(e.target.value)}
           />
+          {isError && <p className="text-red-600"><small>Can't be empty</small></p>}
         </div>
         <div className="w-full flex justify-end">
           <button
-            onClick={() => setNext("email")}
+            onClick={() => {
+              if(name){
+                setNext("email")
+              }else{
+                setIsError(true)
+              }
+            }}
             className=" bg-gradient-to-l from-primary-color to-secondary-color  w-44 h-12 text-white rounded-xl"
           >
             Next

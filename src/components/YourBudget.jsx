@@ -1,16 +1,30 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 
 const YourBudget = ({ budget, setBudget, setNext,handleSubmit }) => {
   const router = useRouter();
+  const [error,setError] = useState("");
+  const [isError,setIsError] = useState(false);
+
   const handleNext = (e) => {
     e.preventDefault();
-    handleSubmit().then(()=>{
-      router.push('/done');
-      // setNext("submited");
-    }).catch((err)=>{
-      // toast
-    })
+    if(Number(budget)){
+      console.log(Number(budget)?"true":"false")
+      if(Number(budget) >= 100){
+        handleSubmit().then(()=>{
+          router.push('/done');
+          // setNext("submited");
+        }).catch((err)=>{
+          // toast
+        })
+      }else{
+        setError("Budget must be atleast 100 USD");
+        setIsError(true);
+      }
+    }else{
+      setError("Must be number eg. 1000, 2000");
+      setIsError(true)
+    }
   };
 
   return (
@@ -19,12 +33,13 @@ const YourBudget = ({ budget, setBudget, setNext,handleSubmit }) => {
         <h1 className=" text-3xl font-bold text-center">Let's Goo!</h1>
         <div>
           
-          <h1 className="font-semibold mb-4">Your budget please</h1>
-          <textarea
+          <h1 className="font-semibold mb-4">Your budget (USD)</h1>
+          <input
             value={budget}
             onChange={(e) => setBudget(e.target.value)}
-            className="w-full outline-none p-3 h-12 rounded-xl"
+            className={isError?"w-full outline-none p-3 h-12 rounded-xl border border-red-600":"w-full outline-none p-3 h-12 rounded-xl"}
           />
+          {isError && <p className="text-red-600"><small>{error}</small></p>}
         </div>
         <div className="w-full flex gap-4 justify-between">
 

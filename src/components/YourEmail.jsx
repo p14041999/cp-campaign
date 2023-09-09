@@ -1,6 +1,28 @@
-import React from "react";
-
+import { TempMailDomainList } from "@/consts/TempEmailList";
+import React, { useState } from "react";
+const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const YourEmail = ({ email, setEmail, setNext }) => {
+  const [isError,setIsError] = useState(false);
+  const [error,setError] = useState(false);
+  const validateEmail = ()=>{
+    if(email){
+      if(email.match(validRegex)){
+        let mailDomain = email.split("@")[1];
+        if(mailDomain && !TempMailDomainList.includes(mailDomain)){
+          handleNext()
+        }else{
+          setError("You can't use temp mail!");
+          setIsError(true);
+        }
+      }else{
+        setError("Invalid email address!");
+        setIsError(true);
+      }
+    }else{
+      setError("Email can't be empty!");
+      setIsError(true);
+    }
+  }
   const handleNext = () => {
     setNext("about");
   };
@@ -14,8 +36,9 @@ const YourEmail = ({ email, setEmail, setNext }) => {
           <input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full outline-none p-3 h-12 rounded-xl"
+            className={isError?"w-full outline-none p-3 h-12 rounded-xl border border-red-600":"w-full outline-none p-3 h-12 rounded-xl"}
           />
+          {isError && <p className="text-red-600"><small>{error}</small></p>}
         </div>
         <div className="w-full flex gap-4 justify-between">
           <button
@@ -25,7 +48,7 @@ const YourEmail = ({ email, setEmail, setNext }) => {
             Back
           </button>
           <button
-            onClick={handleNext}
+            onClick={validateEmail}
             className=" bg-gradient-to-l from-primary-color to-secondary-color  w-44 h-12 text-white rounded-xl"
           >
             Next
